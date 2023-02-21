@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//Michael Feisthauer
+// AuthorMichael Feisthauer
 
 public class App {              
     public static void main(String[] args) throws Exception {
