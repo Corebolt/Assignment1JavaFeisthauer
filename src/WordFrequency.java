@@ -1,5 +1,5 @@
-public class WordFrequency {
-
+public class WordFrequency implements Comparable<WordFrequency>{
+    // part 8
     int index;
     Integer frequency;
     String word;
