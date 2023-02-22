@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 // AuthorMichael Feisthauer
@@ -15,6 +16,20 @@ public class App {
         ArrayList<String> words = readWords("res/words.txt"); //step 4
         HashMap<String, Integer> wordCounter = buildHashMap(words); // step 5
         createHTMLFile(wordCounter); // step 6
+
+        //step 9
+        //put HashMap into arraylist
+        ArrayList<WordFrequency> wordFrequencyArray = new ArrayList<>();
+
+        for(String key: wordCounter.keySet())
+        {
+            WordFrequency wordFrequency = new WordFrequency(wordCounter.get(key), key);
+            wordFrequencyArray.add(wordFrequency);
+        }
+        //System.out.println(wordFrequencyArray);
+
+        Collections.sort(wordFrequencyArray);
+        createSortedHTML(wordFrequencyArray);
     }
 
     //step 4-read input file
@@ -96,5 +111,33 @@ public class App {
             System.out.println(keyWord + ": " + wordCounter.get(keyWord));
         }
     }
+    
+    //step 10 create sorted HTML file
+    private static void createSortedHTML(ArrayList<WordFrequency> passedArrayList)
+    {
+        File sortedFile= new File("res/sortedWords.html");
 
+        try{
+            FileWriter FileWriter = new FileWriter(sortedFile); //writing to an html file
+            StringBuilder builder = new StringBuilder();
+            builder.append("<h1>Word Count</h1>");
+
+            builder.append("<table border = 1> ");  
+            for(WordFrequency key : passedArrayList){  //put each word into the table
+                builder.append("<tr>");
+                builder.append("<td>" + key.getWord() +"</td>");
+                builder.append("<td>" + key.getFrequency() + "</td>");
+                builder.append("</tr>");
+            }
+            builder.append("</table>");
+            FileWriter.append(builder.toString());
+
+            FileWriter.close();
+        } catch(IOException e) {  //catch errors
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        System.out.println(passedArrayList); // showing order in terminal
+    }
 }

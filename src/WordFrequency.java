@@ -1,14 +1,12 @@
 public class WordFrequency implements Comparable<WordFrequency>{
-    // part 8
-    int index;
+    // step 8
     Integer frequency;
     String word;
-    static Integer nextIndex = 1000;
 
-    public WordFrequency(String word, Integer frequency){
+    //constructor
+    public WordFrequency(Integer frequency, String word){
         this.word = word;
         this.frequency = frequency;
-        this.index = nextIndex++;
     }
 
     public String getWord()
@@ -21,13 +19,20 @@ public class WordFrequency implements Comparable<WordFrequency>{
         this.word = newWord;
     }
 
+    public Integer getFrequency()
+    {
+        return frequency;
+    }
+
+    //convert to words string
     @Override
     public String toString() {
         return "Word = " + this.word + " Frequency = " + frequency;
     }
 
+    //compare words in accending frequency order
     @Override
-    public int compareTo(WordFrequency otherWordFrequency)
+    public int compareTo(WordFrequency otherWordFrequency) 
     {
         int compareValue = 0;
         if(this.frequency > otherWordFrequency.frequency)
